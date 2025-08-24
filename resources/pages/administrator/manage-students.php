@@ -117,7 +117,10 @@ if (isset($_POST['addStudent'])) {
                                     echo "<td>" . $row["faculty"] . "</td>";
                                     echo "<td>" . $row["courseCode"] . "</td>";
                                     echo "<td>" . $row["email"] . "</td>";
-                                    echo "<td><span><i class='ri-delete-bin-line delete' data-id='{$row["Id"]}' data-name='students'></i></span></td>";
+                                    echo "<td>
+        <span><i class='ri-edit-line edit' data-id='{$row["Id"]}' data-name='students' data-entity='student' style='margin-right: 10px; cursor: pointer;'></i></span>
+        <span><i class='ri-delete-bin-line delete' data-id='{$row["Id"]}' data-name='students'></i></span>
+      </td>";
                                     echo "</tr>";
                                 }
                             } else {

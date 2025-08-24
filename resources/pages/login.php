@@ -228,7 +228,7 @@ function display_error($error, $is_main = false)
         .input-group select,
         .input-group input {
             width: 100%;
-            padding: 15px 20px 15px 50px;
+            padding: 15px 45px 15px 50px; /* Increased right padding for eye icon */
             border: 2px solid #e5e7eb;
             border-radius: 12px;
             font-size: 1rem;
@@ -242,13 +242,14 @@ function display_error($error, $is_main = false)
             box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
         }
 
-        .input-group i {
+        .input-group i:not(.password-toggle) {
             position: absolute;
             left: 20px;
             top: 50%;
             transform: translateY(-50%);
             color: #9ca3af;
             font-size: 1.1rem;
+            pointer-events: none; /* Prevent icon from blocking input */
         }
 
         .password-toggle {
@@ -259,6 +260,22 @@ function display_error($error, $is_main = false)
             color: #9ca3af;
             cursor: pointer;
             font-size: 1.1rem;
+            z-index: 2; /* Ensure it's above the input */
+            background: transparent;
+            padding: 5px;
+            border-radius: 50%;
+        }
+
+        /* Make the eye icon area larger for easier clicking */
+        .password-toggle::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 30px;
+            height: 30px;
+            z-index: -1;
         }
 
         .recover {
@@ -406,6 +423,18 @@ function display_error($error, $is_main = false)
             .form-title {
                 font-size: 1.5rem;
             }
+            
+            .input-group input {
+                padding: 15px 40px 15px 45px; /* Adjust padding for mobile */
+            }
+            
+            .input-group i:not(.password-toggle) {
+                left: 15px;
+            }
+            
+            .password-toggle {
+                right: 15px;
+            }
         }
     </style>
 </head>
@@ -439,7 +468,11 @@ function display_error($error, $is_main = false)
                     <h2>Attendify<span></span></h2>
                 </div>
                 <h1 class="form-title">Sign In</h1>
-                <?php display_error('login', true); ?>
+                <?php if (isset($errors['login'])): ?>
+                    <div class="error-main">
+                        <p><?php echo $errors['login']; ?></p>
+                    </div>
+                <?php endif; ?>
                 
                 <form method="POST" action="">
                     <div class="input-group">
@@ -453,15 +486,20 @@ function display_error($error, $is_main = false)
                     
                     <div class="input-group">
                         <i class="fas fa-envelope"></i>
-                        <input type="email" name="email" id="email" placeholder="Email Address" required>
-                        <?php display_error('email'); ?>
+                        <input type="email" name="email" id="email" placeholder="Email Address" required 
+                               value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
+                        <?php if (isset($errors['email'])): ?>
+                            <span class="error"><?php echo $errors['email']; ?></span>
+                        <?php endif; ?>
                     </div>
                     
                     <div class="input-group">
                         <i class="fas fa-lock"></i>
                         <input type="password" name="password" id="password" placeholder="Password" required>
                         <i class="fas fa-eye password-toggle" id="eye"></i>
-                        <?php display_error('password'); ?>
+                        <?php if (isset($errors['password'])): ?>
+                            <span class="error"><?php echo $errors['password']; ?></span>
+                        <?php endif; ?>
                     </div>
                     
                     <div class="recover">
@@ -492,7 +530,9 @@ function display_error($error, $is_main = false)
             const passwordInput = document.getElementById('password');
             const eyeIcon = document.getElementById('eye');
             
-            eyeIcon.addEventListener('click', function() {
+            // Make the entire icon area clickable for toggling password visibility
+            eyeIcon.addEventListener('click', function(e) {
+                e.stopPropagation(); // Prevent event from bubbling to input
                 if (passwordInput.type === 'password') {
                     passwordInput.type = 'text';
                     eyeIcon.classList.remove('fa-eye');
@@ -502,6 +542,12 @@ function display_error($error, $is_main = false)
                     eyeIcon.classList.remove('fa-eye-slash');
                     eyeIcon.classList.add('fa-eye');
                 }
+            });
+            
+            // Ensure password input gets focus when clicking on the icon area
+            eyeIcon.addEventListener('mousedown', function(e) {
+                e.preventDefault(); // Prevent focus stealing
+                passwordInput.focus();
             });
         });
     </script>

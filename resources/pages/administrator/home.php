@@ -65,15 +65,13 @@
                                 <th>Phone No</th>
                                 <th>Faculty</th>
                                 <th>Date Registered</th>
-                                <th>Settings</th>
+                               
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <?php
-                                $sql = "SELECT l.*, f.facultyName
-                         FROM tbllecture l
-                         LEFT JOIN tblfaculty f ON l.facultyCode = f.facultyCode";
+                              $sql = "SELECT * FROM tbllecture";
 
                                 $stmt = $pdo->query($sql);
                                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -83,9 +81,9 @@
                                         echo "<td>" . $row["firstName"] . "</td>";
                                         echo "<td>" . $row["emailAddress"] . "</td>";
                                         echo "<td>" . $row["phoneNo"] . "</td>";
-                                        echo "<td>" . $row["facultyName"] . "</td>";
+                                        echo "<td>" . $row["facultyCode"] . "</td>";
                                         echo "<td>" . $row["dateCreated"] . "</td>";
-                                        echo "<td><span><i class='ri-delete-bin-line delete' data-id='{$row["Id"]}' data-name='lecture'></i></span></td>";
+                                       
                                         echo "</tr>";
                                     }
                                 } else {
@@ -112,7 +110,7 @@
                                 <th>Faculty</th>
                                 <th>Course</th>
                                 <th>Email</th>
-                                <th>Settings</th>
+                               
                             </tr>
                         </thead>
                         <tbody>
@@ -128,7 +126,7 @@
                                     echo "<td>" . $row["faculty"] . "</td>";
                                     echo "<td>" . $row["courseCode"] . "</td>";
                                     echo "<td>" . $row["email"] . "</td>";
-                                    echo "<td><span><i class='ri-delete-bin-line delete' data-id='{$row["Id"]}' data-name='students'></i></span></td>";
+                                  
                                     echo "</tr>";
                                 }
                             } else {
@@ -143,6 +141,6 @@
         </div>
     </section>
 
-    <?php js_asset(["active_link", "delete_request"]) ?>
+   
 </body>
 </html>

@@ -103,7 +103,10 @@ if (isset($_POST["addLecture"])) {
                                         echo "<td>" . $row["phoneNo"] . "</td>";
                                         echo "<td>" . $row["facultyCode"] . "</td>";
                                         echo "<td>" . $row["dateCreated"] . "</td>";
-                                        echo "<td><span><i class='ri-delete-bin-line delete' data-id='{$row["Id"]}' data-name='lecture'></i></span></td>";
+                                       echo "<td>
+        <span><i class='ri-edit-line edit' data-id='{$row["Id"]}' data-name='lecture' data-entity='lecture' style='margin-right: 10px; cursor: pointer;'></i></span>
+        <span><i class='ri-delete-bin-line delete' data-id='{$row["Id"]}' data-name='lecture'></i></span>
+      </td>";
                                         echo "</tr>";
                                     }
                                 } else {
