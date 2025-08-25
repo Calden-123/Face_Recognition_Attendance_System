@@ -162,6 +162,10 @@ function updateOtherElements() {
 
 function sendAttendanceDataToServer() {
   const attendanceData = [];
+  // Get the selected date from the date input field
+  const attendanceDate = document.getElementById("attendanceDate").value;
+
+    console.log("Selected date:", attendanceDate);
 
   document
     .querySelectorAll("#studentTableContainer tr")
@@ -172,7 +176,14 @@ function sendAttendanceDataToServer() {
       const unit = row.cells[3].innerText.trim();
       const attendanceStatus = row.cells[5].innerText.trim();
 
-      attendanceData.push({ studentID, course, unit, attendanceStatus });
+      // Add the selected date to each attendance record
+      attendanceData.push({ 
+        studentID, 
+        course, 
+        unit, 
+        attendanceStatus,
+        attendanceDate // Add this line
+      });
     });
 
   const xhr = new XMLHttpRequest();

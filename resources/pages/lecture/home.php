@@ -1,6 +1,4 @@
 <?php
-
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $attendanceData = json_decode(file_get_contents("php://input"), true);
     if ($attendanceData) {
@@ -15,7 +13,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $attendanceStatus = $data['attendanceStatus'];
                 $course = $data['course'];
                 $unit = $data['unit'];
-                $date = date("Y-m-d");
+                
+                // FIXED: Add this line to get the date from the form data
+                $date = isset($data['attendanceDate']) ? $data['attendanceDate'] : date("Y-m-d");
 
                 // Bind parameters and execute for each attendance record
                 $stmt->execute([
@@ -35,7 +35,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['message'] = "No attendance data received.";
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -53,7 +52,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css" rel="stylesheet">
 </head>
 
-
 <body>
 
     <?php include 'includes/topbar.php'; ?>
@@ -62,8 +60,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div id="messageDiv" class="messageDiv" style="display:none;"> </div>
             <p style="font:80px; font-weight:400; color:blue; text-align:center; padding-top:2px;">Please select course,
                 unit, and venue first. Before Launching Facial Recognition</p>
-            <form class="lecture-options" id="selectForm">
-                <!-- Changed the course dropdown onChange to updateUnits() -->
+            <form class="lecture-options" id="selectForm" method="POST">
+                <!-- Add date input field -->
+                <input type="date" name="attendanceDate" id="attendanceDate" required value="<?php echo date('Y-m-d'); ?>">
+                
                 <select required name="course" id="courseSelect" onChange="updateUnits()">
                     <option value="" selected>Select Course</option>
                     <option value="BINCT">BACHELOR OF INFORMATION AND
@@ -76,12 +76,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </option>
                 </select>
 
-                <!-- Changed the unit dropdown to have no onChange. updateTable() will be called after it's populated. -->
                 <select required name="unit" id="unitSelect">
                     <option value="" selected disabled>Select Unit</option>
-                    <!-- Options will be populated dynamically by JavaScript -->
                 </select>
-
 
                 <select required name="venue" id="venueSelect" onChange="updateTable()">
                     <option value="" selected disabled>Select Venue</option>
@@ -91,8 +88,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <option value="Room101">Room 101</option>
                     <option value="Room102">Room 102</option>
                 </select>
-
-
             </form>
             <div class="attendance-button">
                 <button id="startButton" class="add">Launch Facial Recognition</button>
@@ -106,17 +101,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="table-container">
-
-                <div id="studentTableContainer">
-
-                </div>
-
+                <div id="studentTableContainer"></div>
             </div>
-
         </div>
     </section>
+
     <script>
-        // Add the JavaScript for the dynamic unit dropdown here
         const courseToUnits = {
             "BINCT": ["CS101", "CS102", "CS103", "CS104", "CS105"],
             "DIIAD": ["CS103", "CS104"],
@@ -136,13 +126,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             const selectedCourse = courseSelect.value;
             const unitSelect = document.getElementById('unitSelect');
 
-            // Reset unit dropdown
             unitSelect.innerHTML = '<option value="" selected disabled>Select Unit</option>';
 
             if (!selectedCourse) return;
 
             const unitsForCourse = courseToUnits[selectedCourse];
-
             unitsForCourse.forEach(unitCode => {
                 const option = document.createElement('option');
                 option.value = unitCode;
@@ -150,13 +138,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 unitSelect.appendChild(option);
             });
             
-            // Call updateTable after populating the units to refresh the table if needed
             updateTable();
         }
+
+        // You'll need to modify your JavaScript that sends attendance data to include the date
+        // Look for where the attendance data is being sent via AJAX and add:
+        // data.attendanceDate = document.getElementById('attendanceDate').value;
     </script>
 
-    <?php js_asset(["active_link", 'face_logics/script']) ?>
+<script src="resources/assets/javascript/face_logics/script.js"></script>
+    <script src="resources/assets/javascript/active_link.js"></script>
 
 </body>
-
 </html>

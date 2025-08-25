@@ -1,5 +1,4 @@
 <?php
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $attendanceData = json_decode(file_get_contents("php://input"), true);
     $response = [];
@@ -16,7 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $attendanceStatus = $data['attendanceStatus'];
                 $course = $data['course'];
                 $unit = $data['unit'];
-                $date = date("Y-m-d");
+                
+                // CORRECTED: Get date from the JSON data, not from $_POST
+                $date = isset($data['attendanceDate']) ? $data['attendanceDate'] : date("Y-m-d");
 
                 $stmt->execute([
                     ':studentID' => $studentID,
