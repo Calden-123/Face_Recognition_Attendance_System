@@ -38,7 +38,14 @@ $unitNames = [
 
 // Function to calculate attendance mark based on percentage
 function calculateAttendanceMark($presentCount, $totalLectures) {
-    if ($totalLectures == 0) return 0;
+    // Add validation to prevent NaN errors
+    if ($totalLectures == 0 || !is_numeric($presentCount) || !is_numeric($totalLectures)) {
+        return 0;
+    }
+    
+    // Ensure values are integers
+    $presentCount = (int)$presentCount;
+    $totalLectures = (int)$totalLectures;
     
     $attendancePercentage = ($presentCount / $totalLectures) * 100;
     
@@ -47,10 +54,7 @@ function calculateAttendanceMark($presentCount, $totalLectures) {
     } elseif ($attendancePercentage >= 75) {
         return 100; // Full reward for good attendance
     } else {
-        // Linear progression from 50% to 90% for 50-74% attendance
-        // At 50% attendance = 50% mark
-        // At 75% attendance = 100% mark
-        return 70;
+        return 70; // Flat 70% for 50-74% attendance
     }
 }
 ?>
@@ -159,15 +163,22 @@ function calculateAttendanceMark($presentCount, $totalLectures) {
                                         ]);
                                         $attendanceResult = $stmtAttendance->fetch(PDO::FETCH_ASSOC);
 
-                                        if ($attendanceResult) {
-                                            $status = $attendanceResult['attendanceStatus'];
-                                            echo "<td>" . $status . "</td>";
-                                             if (strtolower($status) == 'present') {
-                                                $presentCount++;
-                                            }
-                                        } else {
-                                            echo "<td>Absent</td>";
-                                        }
+                                       if ($attendanceResult) {
+    $status = $attendanceResult['attendanceStatus'];
+    echo "<td>" . $status . "</td>";
+    
+    // More robust check for attendance status
+    $normalizedStatus = strtolower(trim($status));
+    if ($normalizedStatus === 'present' || $normalizedStatus === 'presence' || $normalizedStatus === 'presente') {
+        $presentCount++;
+        echo "<!-- DEBUG: Counted as present -->";
+    } else {
+        echo "<!-- DEBUG: Not counted: $status -->";
+    }
+} else {
+    echo "<td>Absent</td>";
+    echo "<!-- DEBUG: No attendance result -->";
+}
                                     }
                                     
                                     // Calculate and display attendance mark
@@ -224,34 +235,55 @@ function calculateAttendanceMark($presentCount, $totalLectures) {
             document.getElementById('selectForm').submit();
         }
 
-        function exportTableToExcel(tableId, filename = '', courseCode = '', unitCode = '') {
-            var table = document.getElementById(tableId);
-            var currentDate = new Date();
-            var formattedDate = currentDate.toLocaleDateString();
+function exportTableToExcel(tableId, filename = '', courseCode = '', unitCode = '') {
+    var table = document.getElementById(tableId);
+    var currentDate = new Date();
+    var formattedDate = currentDate.toLocaleDateString();
 
-            var headerContent = '<p style="font-weight:700;"> Attendance for : ' + courseCode + ' Unit name : ' + unitCode + ' On: ' + formattedDate + '</p>';
-            var tbody = document.createElement('tbody');
-            var additionalRow = tbody.insertRow(0);
-            var additionalCell = additionalRow.insertCell(0);
-            additionalCell.innerHTML = headerContent;
-            table.insertBefore(tbody, table.firstChild);
-            var wb = XLSX.utils.table_to_book(table, {
-                sheet: "Attendance"
-            });
-            var wbout = XLSX.write(wb, {
-                bookType: 'xlsx',
-                bookSST: true,
-                type: 'binary'
-            });
-            var blob = new Blob([s2ab(wbout)], {
-                type: 'application/octet-stream'
-            });
-            if (!filename.toLowerCase().endsWith('.xlsx')) {
-                filename += '.xlsx';
-            }
-
-            saveAs(blob, filename);
+    var headerContent = '<p style="font-weight:700;"> Attendance for : ' + courseCode + ' Unit name : ' + unitCode + ' On: ' + formattedDate + '</p>';
+    var tbody = document.createElement('tbody');
+    var additionalRow = tbody.insertRow(0);
+    var additionalCell = additionalRow.insertCell(0);
+    additionalCell.innerHTML = headerContent;
+    table.insertBefore(tbody, table.firstChild);
+    
+    // Convert table to workbook
+    var wb = XLSX.utils.table_to_book(table, {
+        sheet: "Attendance"
+    });
+    
+    // Get the worksheet
+    var ws = wb.Sheets["Attendance"];
+    
+    // Get the range of the worksheet
+    var range = XLSX.utils.decode_range(ws['!ref']);
+    
+    // Format the Attendance Mark column (last column) as percentage
+    var attendanceMarkColumn = range.e.c; // Last column index
+    
+    for (let R = range.s.r + 1; R <= range.e.r; ++R) { // Start from row 1 (skip headers)
+        const cellAddress = XLSX.utils.encode_cell({r: R, c: attendanceMarkColumn});
+        if (ws[cellAddress] && ws[cellAddress].v !== undefined) {
+            // Update cell format to percentage
+            ws[cellAddress].t = 'n'; // number type
+            ws[cellAddress].z = '0%'; // percentage format
         }
+    }
+
+    var wbout = XLSX.write(wb, {
+        bookType: 'xlsx',
+        bookSST: true,
+        type: 'binary'
+    });
+    var blob = new Blob([s2ab(wbout)], {
+        type: 'application/octet-stream'
+    });
+    if (!filename.toLowerCase().endsWith('.xlsx')) {
+        filename += '.xlsx';
+    }
+
+    saveAs(blob, filename);
+}
 
         function s2ab(s) {
             var buf = new ArrayBuffer(s.length);
