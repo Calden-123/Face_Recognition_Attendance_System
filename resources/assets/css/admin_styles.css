@@ -9,6 +9,7 @@
 body {
     position: relative;
     width: 100%;
+    background: linear-gradient(135deg, #a1a8be 0%, #ffffff 100%);
 }
 
 .header {
@@ -29,7 +30,7 @@ body {
 }
 
 .logo span {
-    color: #5073fb;
+    background: linear-gradient(135deg, #2C7A7B 0%, #38A169 100%) !important;
 }
 
 /* Navigation items styling */
@@ -59,7 +60,7 @@ body {
 }
 
 .navigation--items a:hover {
-    background-color: #5073fb;
+    background: linear-gradient(135deg, #2C7A7B 0%, #38A169 100%) !important;
     color: #fff;
 }
 
@@ -111,7 +112,7 @@ body {
 
 .search button i {
     font-size: 1.0rem;
-    color: #5073fb;
+    color: #7781aa;
 }
 
 .notification--profile {
@@ -127,7 +128,7 @@ body {
 }
 
 .lock {
-    color: #5073fb;
+    background: linear-gradient(135deg, #2C7A7B 0%, #38A169 100%) !important;
     background-color: rgba(80, 115, 251, .2);
 }
 
@@ -155,12 +156,12 @@ body {
 }
 
 .logout--item a:hover {
-    background-color: rgba(255, 0, 0, 0.1);
-    color: #ff0000;
+    background-color: rgba(0, 0, 0, 0.1);
+    color: #000000;
 }
 
 #active--link {
-    background-color: #5073fb;
+    background: linear-gradient(135deg, #2C7A7B 0%, #38A169 100%) !important;
     color: #fff;
 }
 
@@ -247,12 +248,12 @@ a {
 }
 
 .icon-1 {
-    color: blue;
+    color: rgb(0, 0, 0);
     font-weight:bold;
 }
 
 .icon-2 {
-    color: red;
+    color: rgb(0, 0, 0);
     font-weight:bold;
 }
 
@@ -350,17 +351,15 @@ thead{
         margin-left:10%;
      }
 .main--content {
-    position: absolute;
-    top: 0;
-    right: 0;
-    height: 100%;
-    width: calc(100% - 300px);
-    padding: 0 40px;
-    transition: .3s;
+    position: relative !important;
+    width: 100% !important;
+    left: 0 !important;
+    right: 0 !important;
+    margin: 0 auto !important;
 }
 
 .main--content.active {
-    width: calc(100% - 103px);
+    width: 100% !important;
 }
 
 .title {
@@ -371,7 +370,7 @@ thead{
     margin-top: 30px;
 }
 .new-student{
-    text-align:center; margin-bottom:20px; border-top:solid 3px #5073fb; padding:20px;
+    text-align:center; margin-bottom:20px; border-top:solid 3px #2C7A7B; padding:20px;
 }
 .section--title {
     font-weight: 400;
@@ -488,7 +487,7 @@ padding-bottom:5px;
     padding: 5px 10px;
     outline: none;
     border: none;
-    background-color: #5073fb;
+    background: linear-gradient(135deg, #2C7A7B 0%, #38A169 100%) !important;
     color: #fff;
     border-radius: 5px;
     cursor: pointer;
@@ -533,7 +532,7 @@ padding-bottom:5px;
 }
 
 .img--box--cover {
-    border: 1px solid #5073fb;
+    border: 1px solid #2C7A7B;
     padding: 2px;
     border-radius: 50%;
     display: inline-block;
@@ -556,7 +555,7 @@ padding-bottom:5px;
 }
 
 .scheduled {
-    color: #5073fb;
+    background: linear-gradient(135deg, #2C7A7B 0%, #38A169 100%) !important;
 }
 
 
@@ -744,7 +743,7 @@ select:focus,input:focus{
     outline:none;
     border:none;
     width:65%;
-    background:#5073fb;
+    background: linear-gradient(135deg, #2C7A7B 0%, #38A169 100%) !important;
     color:#fff;
     cursor:pointer;
     margin-left:3.3rem;
@@ -772,7 +771,7 @@ button:hover{
   .image-box:hover img {
     filter: blur(0.5px); 
     cursor:pointer;
-    box-shadow: 0px 0px 10px #5073fb;
+    box-shadow: 0px 0px 10px #2C7A7B;
 
   }
   .edit-icon {
@@ -812,7 +811,7 @@ button:hover{
     filter: blur(1.5px); 
     cursor:pointer;
     transform: scale(1.1);
-    box-shadow: 0px 0px 10px #5073fb;
+    box-shadow: 0px 0px 10px #2C7A7B;
   } 
   
 

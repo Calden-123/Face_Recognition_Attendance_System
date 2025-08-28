@@ -62,7 +62,7 @@ if (!empty($unitCode)) {
 
                 <!-- Changed the unit dropdown to have no initial options. They will be populated dynamically -->
                 <select required name="unit" id="unitSelect" onChange="updateTable()">
-                    <option value="" selected disabled>Select Unit</option>
+                    <option value="" selected disabled>Select Module</option>
                     <!-- Options will be populated dynamically by JavaScript -->
                 </select>
             </form>
@@ -132,7 +132,7 @@ if (!empty($unitCode)) {
             const unitSelect = document.getElementById('unitSelect');
 
             // Reset unit dropdown
-            unitSelect.innerHTML = '<option value="" selected disabled>Select Unit</option>';
+            unitSelect.innerHTML = '<option value="" selected disabled>Select Module</option>';
 
             if (!selectedCourse) return;
 

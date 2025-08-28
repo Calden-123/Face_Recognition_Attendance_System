@@ -85,7 +85,7 @@ function calculateAttendanceMark($presentCount, $totalLectures) {
                 </select>
 
                 <select required name="unit" id="unitSelect" onChange="this.form.submit()">
-                    <option value="" selected disabled>Select Unit</option>
+                    <option value="" selected disabled>Select Module</option>
                     <?php
                     if (!empty($courseCode) && isset($courseToUnits[$courseCode])) {
                         foreach ($courseToUnits[$courseCode] as $unit) {
@@ -218,9 +218,10 @@ function calculateAttendanceMark($presentCount, $totalLectures) {
             const unitSelect = document.getElementById('unitSelect');
 
             // Reset unit dropdown
-            unitSelect.innerHTML = '<option value="" selected disabled>Select Unit</option>';
+            unitSelect.innerHTML = '<option value="" selected disabled>Select Module</option>';
 
             if (!selectedCourse) return;
+            
 
             const unitsForCourse = courseToUnits[selectedCourse];
 

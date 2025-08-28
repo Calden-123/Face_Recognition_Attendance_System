@@ -77,365 +77,367 @@ function display_error($error, $is_main = false)
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-        }
+       * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
 
-        body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
-        }
+body {
+    background: linear-gradient(135deg, #2C7A7B 0%, #38A169 100%); /* Teal gradient */
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
 
-        .login-container {
-            display: flex;
-            width: 100%;
-            max-width: 1000px;
-            min-height: 600px;
-            background: white;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
-        }
+.login-container {
+    display: flex;
+    width: 100%;
+    max-width: 1000px;
+    min-height: 600px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2);
+}
 
-        .login-left {
-            flex: 1;
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            color: white;
-            padding: 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
+.login-left {
+    flex: 1;
+    background: linear-gradient(135deg, #2C7A7B 0%, #38A169 100%); /* Teal gradient */
+    color: white;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
 
-        .login-left::before {
-            content: '';
-            position: absolute;
-            top: -50px;
-            right: -50px;
-            width: 200px;
-            height: 200px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-        }
+.login-left::before {
+    content: '';
+    position: absolute;
+    top: -50px;
+    right: -50px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+}
 
-        .login-left::after {
-            content: '';
-            position: absolute;
-            bottom: -80px;
-            left: -80px;
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-        }
+.login-left::after {
+    content: '';
+    position: absolute;
+    bottom: -80px;
+    left: -80px;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+}
 
-        .welcome-text h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 2;
-        }
+/* Update all purple colors to teal */
+.logo h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2C7A7B; /* Teal color */
+}
 
-        .welcome-text p {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            opacity: 0.9;
-            margin-bottom: 30px;
-            position: relative;
-            z-index: 2;
-        }
+.logo span {
+    color: #38A169; /* Green-teal color */
+}
 
-        .features {
-            margin-top: 30px;
-            position: relative;
-            z-index: 2;
-        }
+.input-group select:focus,
+.input-group input:focus {
+    border-color: #2C7A7B; /* Teal color */
+    box-shadow: 0 0 0 3px rgba(44, 122, 123, 0.2); /* Teal shadow */
+}
 
-        .feature {
-            display: flex;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+.recover a {
+    color: #2C7A7B; /* Teal color */
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
 
-        .feature i {
-            font-size: 1.2rem;
-            margin-right: 15px;
-            background: rgba(255, 255, 255, 0.2);
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+.recover a:hover {
+    color: #38A169; /* Green-teal color */
+    text-decoration: underline;
+}
 
-        .feature span {
-            font-size: 1rem;
-        }
+.btn {
+    width: 100%;
+    padding: 15px;
+    background: linear-gradient(135deg, #2C7A7B 0%, #38A169 100%); /* Teal gradient */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(44, 122, 123, 0.2); /* Teal shadow */
+}
 
-        .login-right {
-            flex: 1;
-            padding: 50px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(44, 122, 123, 0.3); /* Teal shadow */
+    background: linear-gradient(135deg, #285E61 0%, #2F855A 100%); /* Darker teal gradient */
+}
 
-        .login-form {
-            width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
-        }
+/* Keep the rest of your CSS the same */
+.welcome-text h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
 
-        .logo {
-            text-align: center;
-            margin-bottom: 40px;
-        }
+.welcome-text p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 2;
+}
 
-        .logo h2 {
-            font-size: 2rem;
-            font-weight: 700;
-            color: #4f46e5;
-        }
+.features {
+    margin-top: 30px;
+    position: relative;
+    z-index: 2;
+}
 
-        .logo span {
-            color: #7c3aed;
-        }
+.feature {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
 
-        .form-title {
-            font-size: 1.8rem;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 30px;
-            text-align: center;
-        }
+.feature i {
+    font-size: 1.2rem;
+    margin-right: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-        .input-group {
-            position: relative;
-            margin-bottom: 25px;
-        }
+.feature span {
+    font-size: 1rem;
+}
 
-        .input-group select,
-        .input-group input {
-            width: 100%;
-            padding: 15px 45px 15px 50px; /* Increased right padding for eye icon */
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            outline: none;
-        }
+.login-right {
+    flex: 1;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
 
-        .input-group select:focus,
-        .input-group input:focus {
-            border-color: #4f46e5;
-            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.2);
-        }
+.login-form {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
 
-        .input-group i:not(.password-toggle) {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #9ca3af;
-            font-size: 1.1rem;
-            pointer-events: none; /* Prevent icon from blocking input */
-        }
+.logo {
+    text-align: center;
+    margin-bottom: 40px;
+}
 
-        .password-toggle {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #9ca3af;
-            cursor: pointer;
-            font-size: 1.1rem;
-            z-index: 2; /* Ensure it's above the input */
-            background: transparent;
-            padding: 5px;
-            border-radius: 50%;
-        }
+.form-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 30px;
+    text-align: center;
+}
 
-        /* Make the eye icon area larger for easier clicking */
-        .password-toggle::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 30px;
-            height: 30px;
-            z-index: -1;
-        }
+.input-group {
+    position: relative;
+    margin-bottom: 25px;
+}
 
-        .recover {
-            text-align: right;
-            margin-bottom: 25px;
-        }
+.input-group select,
+.input-group input {
+    width: 100%;
+    padding: 15px 45px 15px 50px;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    outline: none;
+}
 
-        .recover a {
-            color: #4f46e5;
-            text-decoration: none;
-            font-size: 0.9rem;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
+.input-group i:not(.password-toggle) {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    font-size: 1.1rem;
+    pointer-events: none;
+}
 
-        .recover a:hover {
-            color: #7c3aed;
-            text-decoration: underline;
-        }
+.password-toggle {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #9ca3af;
+    cursor: pointer;
+    font-size: 1.1rem;
+    z-index: 2;
+    background: transparent;
+    padding: 5px;
+    border-radius: 50%;
+}
 
-        .btn {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            color: white;
-            border: none;
-            border-radius: 12px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 6px rgba(79, 70, 229, 0.2);
-        }
+.password-toggle::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    z-index: -1;
+}
 
-        .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(79, 70, 229, 0.3);
-        }
+.recover {
+    text-align: right;
+    margin-bottom: 25px;
+}
 
-        .divider {
-            display: flex;
-            align-items: center;
-            margin: 30px 0;
-            color: #9ca3af;
-        }
+.divider {
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+    color: #9ca3af;
+}
 
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: #e5e7eb;
-        }
+.divider::before,
+.divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #e5e7eb;
+}
 
-        .divider span {
-            padding: 0 15px;
-            font-size: 0.9rem;
-        }
+.divider span {
+    padding: 0 15px;
+    font-size: 0.9rem;
+}
 
-        .social-login {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
+.social-login {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 30px;
+}
 
-        .social-btn {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: #f3f4f6;
-            color: #4b5563;
-            border: 2px solid #e5e7eb;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-size: 1.2rem;
-        }
+.social-btn {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    color: #4b5563;
+    border: 2px solid #e5e7eb;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
 
-        .social-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
+.social-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
 
-        .social-btn.google:hover {
-            background: #db4437;
-            color: white;
-            border-color: #db4437;
-        }
+.social-btn.google:hover {
+    background: #db4437;
+    color: white;
+    border-color: #db4437;
+}
 
-        .social-btn.facebook:hover {
-            background: #4267B2;
-            color: white;
-            border-color: #4267B2;
-        }
+.social-btn.facebook:hover {
+    background: #4267B2;
+    color: white;
+    border-color: #4267B2;
+}
 
-        .error-main {
-            background: #fee2e2;
-            color: #dc2626;
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            border-left: 4px solid #dc2626;
-        }
+.error-main {
+    background: #fee2e2;
+    color: #dc2626;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    border-left: 4px solid #dc2626;
+}
 
-        .error {
-            color: #dc2626;
-            font-size: 0.85rem;
-            margin-top: 5px;
-            display: block;
-        }
+.error {
+    color: #dc2626;
+    font-size: 0.85rem;
+    margin-top: 5px;
+    display: block;
+}
 
-        @media (max-width: 900px) {
-            .login-container {
-                flex-direction: column;
-                max-width: 500px;
-            }
+@media (max-width: 900px) {
+    .login-container {
+        flex-direction: column;
+        max-width: 500px;
+    }
 
-            .login-left {
-                padding: 30px;
-                text-align: center;
-            }
+    .login-left {
+        padding: 30px;
+        text-align: center;
+    }
 
-            .login-left::before,
-            .login-left::after {
-                display: none;
-            }
+    .login-left::before,
+    .login-left::after {
+        display: none;
+    }
 
-            .feature {
-                justify-content: center;
-            }
-        }
+    .feature {
+        justify-content: center;
+    }
+}
 
-        @media (max-width: 480px) {
-            .login-right {
-                padding: 30px 20px;
-            }
+@media (max-width: 480px) {
+    .login-right {
+        padding: 30px 20px;
+    }
 
-            .welcome-text h1 {
-                font-size: 2rem;
-            }
+    .welcome-text h1 {
+        font-size: 2rem;
+    }
 
-            .form-title {
-                font-size: 1.5rem;
-            }
-            
-            .input-group input {
-                padding: 15px 40px 15px 45px; /* Adjust padding for mobile */
-            }
-            
-            .input-group i:not(.password-toggle) {
-                left: 15px;
-            }
-            
-            .password-toggle {
-                right: 15px;
-            }
-        }
+    .form-title {
+        font-size: 1.5rem;
+    }
+    
+    .input-group input {
+        padding: 15px 40px 15px 45px;
+    }
+    
+    .input-group i:not(.password-toggle) {
+        left: 15px;
+    }
+    
+    .password-toggle {
+        right: 15px;
+    }
+}
     </style>
 </head>
 
@@ -502,24 +504,11 @@ function display_error($error, $is_main = false)
                         <?php endif; ?>
                     </div>
                     
-                    <div class="recover">
-                        <a href="#">Forgot Password?</a>
-                    </div>
                     
                     <input type="submit" class="btn" value="Sign In" name="login">
                 </form>
                 
-                <div class="divider">
-                    <span>Or continue with</span>
-                </div>
-                
-                <div class="social-login">
-                    <div class="social-btn google">
-                        <i class="fab fa-google"></i>
-                    </div>
-                    <div class="social-btn facebook">
-                        <i class="fab fa-facebook-f"></i>
-                    </div>
+           
                 </div>
             </div>
         </div>

@@ -58,8 +58,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <section class="main">
         <div class="main--content">
             <div id="messageDiv" class="messageDiv" style="display:none;"> </div>
-            <p style="font:80px; font-weight:400; color:blue; text-align:center; padding-top:2px;">Please select course,
-                unit, and venue first. Before Launching Facial Recognition</p>
+            <p style="font:80px; font-weight:400; color:black; text-align:center; padding-top:2px;">Please select course,
+                module, and venue first. Before Launching Facial Recognition</p>
             <form class="lecture-options" id="selectForm" method="POST">
                 <!-- Add date input field -->
                 <input type="date" name="attendanceDate" id="attendanceDate" required value="<?php echo date('Y-m-d'); ?>">
@@ -77,7 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </select>
 
                 <select required name="unit" id="unitSelect">
-                    <option value="" selected disabled>Select Unit</option>
+                    <option value="" selected disabled>Select Module</option>
                 </select>
 
                 <select required name="venue" id="venueSelect" onChange="updateTable()">
@@ -126,7 +126,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             const selectedCourse = courseSelect.value;
             const unitSelect = document.getElementById('unitSelect');
 
-            unitSelect.innerHTML = '<option value="" selected disabled>Select Unit</option>';
+            unitSelect.innerHTML = '<option value="" selected disabled>Select Module</option>';
 
             if (!selectedCourse) return;
 

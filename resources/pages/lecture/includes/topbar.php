@@ -1,6 +1,6 @@
 <section class="header">
     <div class="logo">
-        <h2>Attendify<span></span></h2>
+        <h2>ATTENDIFY<span></span></h2>
     </div>
     
     <!-- Navigation items moved from sidebar -->

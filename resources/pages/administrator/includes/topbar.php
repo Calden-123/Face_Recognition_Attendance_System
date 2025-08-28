@@ -1,7 +1,7 @@
 <section class="header">
         <div class="logo">
 
-            <h2>Attendify<span></span></h2>
+            <h2>ATTENDIFY<span></span></h2>
         </div>
         
         <!-- Navigation items moved from sidebar -->
@@ -16,7 +16,7 @@
                 <li>
                     <a href="manage-lecture">
                         <span class="icon icon-1"><i class="ri-user-line"></i></span>
-                        <span class="navigation--item">manage lectures</span>
+                        <span class="navigation--item">Manage Lectures</span>
                     </a>
                 </li>
                 <li>
@@ -35,7 +35,7 @@
             </div>
             <div class="notification--profile">
                 <div class="picon lock">
-                    @ Username
+                    @ Admin
                 </div>
                 <div class="picon profile">
                     <img src="resources/images/user.png" alt="">
