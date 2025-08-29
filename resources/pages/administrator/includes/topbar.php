@@ -38,7 +38,7 @@
                     @ Admin
                 </div>
                 <div class="picon profile">
-                    <img src="resources/images/user.png" alt="">
+                    <img src="resources/images/user1.png" alt="">
                 </div>
             </div>
             

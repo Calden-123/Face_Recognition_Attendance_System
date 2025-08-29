@@ -17,7 +17,7 @@ body {
     width: 100%;
     display: flex;
     align-items: center;
-    border-bottom: 2px solid #f1f1f1;
+    border-bottom: 2px solid #056d01;
     justify-content: space-between;
     padding: 0 20px;
     gap: 20px;
@@ -54,7 +54,7 @@ body {
     align-items: center;
     padding: 8px 15px;
     border-radius: 10px;
-    color: #000;
+    color: #000000;
     text-decoration: none;
     transition: background-color 0.3s;
 }
@@ -253,7 +253,7 @@ a {
 }
 
 .icon-2 {
-    color: rgb(0, 0, 0);
+    color: rgb(1, 99, 42);
     font-weight:bold;
 }
 

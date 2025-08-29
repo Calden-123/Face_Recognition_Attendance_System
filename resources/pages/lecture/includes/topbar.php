@@ -37,7 +37,7 @@
                 @ <?php echo user()->name ?>
             </div>
             <div class="picon profile">
-                <img src="resources/images/user.png" alt="">
+                <img src="resources/images/user2.png" alt="">
             </div>
         </div>
         
